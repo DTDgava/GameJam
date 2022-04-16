@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Scenes/DefaultWorld.unity
+    guid: 9e7c295d6bc9dc84cb27a66129d9b4a2
+  - enabled: 1
+    path: Assets/Scenes/WaterWorld.unity
+    guid: 06b1be142234b9346b5a16a9ef35ca38
+  - enabled: 1
+    path: Assets/Scenes/LavaWorld.unity
+    guid: 6a069db9988936845b7417a796378912
   m_configObjects: {}

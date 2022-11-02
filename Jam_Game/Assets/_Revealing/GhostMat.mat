@@ -61,9 +61,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - MyGlossiness: 0.5
-    - MyLightAngle: 60
+    - MyLightAngle: 1
     - MyMetallic: 0
-    - MyStrengthScalor: 50
+    - MyStrengthScalor: 25
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -82,8 +82,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - MyColor: {r: 0.46165106, g: 0.8301887, b: 0.3563546, a: 1}
-    - MyLightDirection: {r: -0, g: -0, b: -1, a: 0}
-    - MyLightPosition: {r: 616.53, g: 19.04, b: 376.48, a: 0}
+    - MyLightDirection: {r: -0.00000008626637, g: -0.00000014484414, b: -1, a: 0}
+    - MyLightPosition: {r: 616.806, g: 19.676388, b: 377.03983, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

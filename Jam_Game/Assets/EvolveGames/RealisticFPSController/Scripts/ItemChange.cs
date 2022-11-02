@@ -9,7 +9,6 @@ namespace EvolveGames
     {
         [Header("Item Change")]
         [SerializeField] public Animator ani;
-        [SerializeField] Image ItemCanvasLogo;
         [SerializeField] bool LoopItems = true;
         [SerializeField, Tooltip("You can add your new item here.")] GameObject[] Items;
         [SerializeField, Tooltip("These logos must have the same order as the items.")] Sprite[] ItemLogos;
@@ -22,13 +21,9 @@ namespace EvolveGames
         private void Start()
         {
             if (ani == null && GetComponent<Animator>()) ani = GetComponent<Animator>();
-            Color OpacityColor = ItemCanvasLogo.color;
-            OpacityColor.a = 0;
-            ItemCanvasLogo.color = OpacityColor;
             ItemChangeLogo = false;
             DefiniteHide = false;
             ChangeItemInt = ItemIdInt;
-            ItemCanvasLogo.sprite = ItemLogos[ItemIdInt];
             MaxItems = Items.Length - 1;
             StartCoroutine(ItemChangeObject());
         }
@@ -76,36 +71,10 @@ namespace EvolveGames
                 Items[i].SetActive(false);
             }
             Items[ItemIdInt].SetActive(true);
-            if (!ItemChangeLogo) StartCoroutine(ItemLogoChange());
 
             if (!DefiniteHide) ani.SetBool("Hide", false);
         }
 
-        IEnumerator ItemLogoChange()
-        {
-            ItemChangeLogo = true;
-            yield return new WaitForSeconds(0.5f);
-            ItemCanvasLogo.sprite = ItemLogos[ItemIdInt];
-            yield return new WaitForSeconds(0.1f);
-            ItemChangeLogo = false;
-        }
-
-        private void FixedUpdate()
-        {
-            
-            if (ItemChangeLogo)
-            {
-                Color OpacityColor = ItemCanvasLogo.color;
-                OpacityColor.a = Mathf.Lerp(OpacityColor.a, 0, 20 * Time.deltaTime);
-                ItemCanvasLogo.color = OpacityColor;
-            }
-            else
-            {
-                Color OpacityColor = ItemCanvasLogo.color;
-                OpacityColor.a = Mathf.Lerp(OpacityColor.a, 1, 6 * Time.deltaTime);
-                ItemCanvasLogo.color = OpacityColor;
-            }
-        }
     }
 
 }

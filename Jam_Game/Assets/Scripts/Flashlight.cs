@@ -16,6 +16,12 @@ public class Flashlight : MonoBehaviour
     public float SpeedBatteryLose;
     public float SpeedBatteryLoseGhost;
 
+    EvolveGames.ItemChange ChangeItemScrpt;
+
+    private void Awake()
+    {
+        ChangeItemScrpt = GetComponent<EvolveGames.ItemChange>();
+    }
     private void Update()
     {
         TurnFlashLight();
@@ -25,7 +31,7 @@ public class Flashlight : MonoBehaviour
 
     void BatteryUpdate()
     {
-        if (currentValueBattery > 0)
+        if (currentValueBattery > 0 && FlashlightObject.activeSelf == true)
         {
             if (standartLight.enabled == true)
             {
@@ -36,25 +42,21 @@ public class Flashlight : MonoBehaviour
                 currentValueBattery -= Time.deltaTime * SpeedBatteryLoseGhost;
             }
         }
-        else if(currentValueBattery <= 0)
+        else if (currentValueBattery <= 0)
         {
             currentValueBattery = 0;
-            standartLight.enabled = false;
-            ghostLight.enabled = false;
-            ghostLight.spotAngle = 1;
+            OffLight();
         }
     }
     void TurnFlashLight()
     {
-        if(FlashlightObject.activeSelf == true && currentValueBattery > 0)
+        if (FlashlightObject.activeSelf == true && currentValueBattery > 0)
         {
             if (Input.GetMouseButtonDown(1))
             {
                 if (ghostLight.enabled == true)
                 {
-                    standartLight.enabled = true;
-                    ghostLight.enabled = false;
-                    ghostLight.spotAngle = 1;
+                    OnStandartLight();
                 }
                 else if (standartLight.enabled == true)
                 {
@@ -64,21 +66,29 @@ public class Flashlight : MonoBehaviour
                 }
             }
 
-            else if (Input.GetKeyDown(KeyCode.F))
+            else if (Input.GetKeyDown(KeyCode.F) && ChangeItemScrpt.Hided == false)
             {
                 if (standartLight.enabled == true | ghostLight.enabled == true)
                 {
-                    standartLight.enabled = false;
-                    ghostLight.enabled = false;
-                    ghostLight.spotAngle = 1;
+                    OffLight();
                 }
-                else if(standartLight.enabled == false | ghostLight.enabled == false)
+                else if (standartLight.enabled == false | ghostLight.enabled == false)
                 {
-                    standartLight.enabled = true;
-                    ghostLight.enabled = false ;
-                    ghostLight.spotAngle = 1;
+                    OnStandartLight();
                 }
             }
         }
+    }
+    public void OffLight()
+    {
+        standartLight.enabled = false;
+        ghostLight.enabled = false;
+        ghostLight.spotAngle = 1;
+    }
+    public void OnStandartLight()
+    {
+        standartLight.enabled = true;
+        ghostLight.enabled = false;
+        ghostLight.spotAngle = 1;
     }
 }

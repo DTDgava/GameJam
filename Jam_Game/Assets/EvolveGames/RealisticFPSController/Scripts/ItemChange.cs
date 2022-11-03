@@ -17,9 +17,13 @@ namespace EvolveGames
         int ChangeItemInt;
         [HideInInspector] public bool DefiniteHide;
         bool ItemChangeLogo;
+        public   bool Hided = false;
+
+        private Flashlight flashLight;
 
         private void Start()
         {
+            flashLight = GetComponent<Flashlight>();
             if (ani == null && GetComponent<Animator>()) ani = GetComponent<Animator>();
             ItemChangeLogo = false;
             DefiniteHide = false;
@@ -41,8 +45,18 @@ namespace EvolveGames
 
             if(Input.GetKeyDown(KeyCode.H))
             {
-                if (ani.GetBool("Hide")) Hide(false);
-                else Hide(true);
+                if (ani.GetBool("Hide"))
+                {
+                    Hide(false);
+                    flashLight.OnStandartLight();
+                    Hided = false;
+                }
+                else
+                {
+                    Hide(true);
+                    flashLight.OffLight();
+                    Hided = true;
+                }
             }
 
             if (ItemIdInt < 0) ItemIdInt = LoopItems ? MaxItems : 0;

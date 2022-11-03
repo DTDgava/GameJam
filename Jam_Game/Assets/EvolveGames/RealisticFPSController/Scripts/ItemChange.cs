@@ -20,9 +20,11 @@ namespace EvolveGames
         public   bool Hided = false;
 
         private Flashlight flashLight;
+        private CameraSystem cameraSystem;
 
         private void Start()
         {
+            cameraSystem = GetComponent<CameraSystem>();
             flashLight = GetComponent<Flashlight>();
             if (ani == null && GetComponent<Animator>()) ani = GetComponent<Animator>();
             ItemChangeLogo = false;
@@ -36,11 +38,15 @@ namespace EvolveGames
             if (Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
                 ItemIdInt++;
+                flashLight.OffLight();
+                cameraSystem.OffCamera();
             }
 
             if (Input.GetAxis("Mouse ScrollWheel") < 0f)
             {
                 ItemIdInt--;
+                flashLight.OffLight();
+                cameraSystem.OffCamera();
             }
 
             if(Input.GetKeyDown(KeyCode.H))

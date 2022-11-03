@@ -3,10 +3,17 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    private void Update()
+    public Camera mainCamera;
+
+
+    private void OnTriggerStay(Collider collider)
     {
-        StartCoroutine(CameraShakeCoroutine(1f));
+        if(collider.tag == "GameController")
+        {
+            StartCoroutine(CameraShakeCoroutine(0.7f));
+        }
     }
+
 
     private IEnumerator CameraShakeCoroutine(float duration)
     {
@@ -15,16 +22,16 @@ public class CameraShake : MonoBehaviour
 
         while (elapsed < duration)
         {
-            float x = (Random.value - 0.5f) * currentMagnitude;
-            float y = (Random.value - 0.5f) * currentMagnitude;
+            float x = (Random.value - 0.2f) * currentMagnitude;
+            float y = (Random.value - 0.2f) * currentMagnitude;
 
-            transform.localPosition = new Vector3(x, 0, 0);
+            mainCamera.transform.localPosition = new Vector3(x, y, 0);
 
             elapsed += Time.deltaTime;
             currentMagnitude = (1 - (elapsed / duration) * (1 - (elapsed / duration)));
 
             yield return null;
         }
-        transform.localPosition = Vector3.zero;
+        mainCamera.transform.localPosition = Vector3.zero;
     }
 }

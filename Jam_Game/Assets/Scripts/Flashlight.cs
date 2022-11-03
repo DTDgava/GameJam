@@ -11,6 +11,7 @@ public class Flashlight : MonoBehaviour
     public float currentValueBattery = 70f;
 
     public float SpotAngleFlashLight = 50f;
+    public float SpotAngleGhostLight = 25f;
 
 
     public float SpeedBatteryLose;
@@ -62,7 +63,7 @@ public class Flashlight : MonoBehaviour
                 {
                     standartLight.enabled = false;
                     ghostLight.enabled = true;
-                    ghostLight.spotAngle = SpotAngleFlashLight;
+                    ghostLight.spotAngle = SpotAngleGhostLight;
                 }
             }
 

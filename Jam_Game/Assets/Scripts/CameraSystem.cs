@@ -11,7 +11,13 @@ public class CameraSystem : MonoBehaviour
     float hour;
 
     public Text TimeText;
-    
+
+    private Flashlight flashLight;
+
+    private void Awake()
+    {
+        flashLight = GetComponent<Flashlight>();
+    }
     void OnCamera()
     {
         CameraImage.SetActive(true);
@@ -52,6 +58,11 @@ public class CameraSystem : MonoBehaviour
                         OnCamera();
                     }
                 }
+            }
+            if(CameraImage.activeSelf == true && Input.GetMouseButton(1))
+            {
+                flashLight.ghostLight.enabled = true;
+                flashLight.ghostLight.spotAngle = flashLight.SpotAngleGhostLight;
             }
         }
     }

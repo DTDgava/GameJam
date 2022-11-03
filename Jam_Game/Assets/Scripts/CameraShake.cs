@@ -4,13 +4,14 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour
 {
     public Camera mainCamera;
-
+    public float Shake;
+    public float Duration;
 
     private void OnTriggerStay(Collider collider)
     {
         if(collider.tag == "GameController")
         {
-            StartCoroutine(CameraShakeCoroutine(0.7f));
+            StartCoroutine(CameraShakeCoroutine(Duration));
         }
     }
 
@@ -22,8 +23,8 @@ public class CameraShake : MonoBehaviour
 
         while (elapsed < duration)
         {
-            float x = (Random.value - 0.2f) * currentMagnitude;
-            float y = (Random.value - 0.2f) * currentMagnitude;
+            float x = (Random.value - Shake) * currentMagnitude;
+            float y = (Random.value - Shake) * currentMagnitude;
 
             mainCamera.transform.localPosition = new Vector3(x, y, 0);
 

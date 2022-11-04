@@ -25,6 +25,8 @@ public class CameraSystem : MonoBehaviour
     public void OffCamera()
     {
         CameraImage.SetActive(false);
+        flashLight.ghostLight.enabled = false;
+        flashLight.ghostLight.spotAngle = 1;
     }
     private void OnTriggerStay(Collider other)
     {

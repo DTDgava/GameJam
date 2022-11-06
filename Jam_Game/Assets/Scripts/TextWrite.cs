@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class TextWrite : MonoBehaviour
 {
     private Text TextArea;
@@ -13,8 +12,18 @@ public class TextWrite : MonoBehaviour
     [SerializeField] private float Disable;
 
 
+    private Animation CloseTextAnim;
+
+    private AudioSource AudioKeyBoard;
+
+
+    public float YPos = 540;
+
+
     private void Start()
     {
+        AudioKeyBoard = GetComponent<AudioSource>();
+        CloseTextAnim = GetComponent<Animation>();
         TextArea = GetComponent<Text>();
         text = TextArea.text;
         TextArea.text = null;
@@ -26,15 +35,21 @@ public class TextWrite : MonoBehaviour
         {
             TextArea.text += abc;
             yield return new WaitForSeconds(Speed);
+            TextArea.transform.position = new Vector3(960,YPos,0);
+            YPos += Time.deltaTime * 5;
         }
         if (TextArea.text == text)
         {
+            AudioKeyBoard.Stop();
             yield return new WaitForSeconds(Disable);
             Close();
         }
     }
     void Close()
     {
-        this.gameObject.SetActive(false);
+        CloseTextAnim.Play();
+    }
+    private void Update()
+    {
     }
 }

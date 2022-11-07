@@ -16,18 +16,29 @@ public class TextWrite : MonoBehaviour
 
     private AudioSource AudioKeyBoard;
 
-
     public float YPos = 540;
 
+    public bool Anim;
+    public bool Audio;
+
+
+    public TextWrite TextStart;
 
     private void Start()
     {
-        AudioKeyBoard = GetComponent<AudioSource>();
-        CloseTextAnim = GetComponent<Animation>();
+        if (Audio == true)
+        {
+            AudioKeyBoard = GetComponent<AudioSource>();
+        }
+        if (Anim == true)
+        {
+            CloseTextAnim = GetComponent<Animation>();
+        }
         TextArea = GetComponent<Text>();
         text = TextArea.text;
         TextArea.text = null;
         StartCoroutine(TextAnimation());
+
     }
     private IEnumerator TextAnimation()
     {
@@ -35,21 +46,43 @@ public class TextWrite : MonoBehaviour
         {
             TextArea.text += abc;
             yield return new WaitForSeconds(Speed);
-            TextArea.transform.position = new Vector3(960,YPos,0);
-            YPos += Time.deltaTime * 5;
+      
         }
         if (TextArea.text == text)
         {
-            AudioKeyBoard.Stop();
+            if (Audio == true)
+            {
+                AudioKeyBoard.Stop();
+            }
             yield return new WaitForSeconds(Disable);
             Close();
+            yield return new WaitForSeconds(2);
+            if (TextStart != null)
+            {
+                TextStart.gameObject.SetActive(true);
+                TextStart.enabled = true;
+            }
+
         }
     }
     void Close()
     {
-        CloseTextAnim.Play();
+        if (Anim == true)
+        {
+            CloseTextAnim.Play();
+        }
+    }
+    private void Move()
+    {
+        TextArea.transform.position = new Vector3(960, YPos, 0);
+        YPos += Time.deltaTime * 5;
     }
     private void Update()
     {
+        if (Input.anyKey)
+        {
+            Debug.Log("bebra");
+        }
     }
+
 }

@@ -55,6 +55,11 @@ namespace EvolveGames
             }
 
         }
+        public void Close()
+        {
+            Destroy(ImageUI);
+            Destroy(ImageText);
+        }
         private Vector3 calculateWorldPosition(Vector3 position, Camera camera)
         {
             Vector3 camNormal = camera.transform.forward;
